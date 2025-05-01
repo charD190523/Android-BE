@@ -18,4 +18,5 @@ public interface AuthOperations {
 
     @PostMapping("/login")
     ResponseEntity<GeneralResponse<String>> login(@RequestBody @Valid SignInRequestDTO requestDTO);
+
 }

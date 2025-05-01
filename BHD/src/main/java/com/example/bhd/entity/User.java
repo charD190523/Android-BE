@@ -29,4 +29,5 @@ public class User {
     private LocalDateTime birthday;
     private String address;
     private String province;
+    private String role;
 }

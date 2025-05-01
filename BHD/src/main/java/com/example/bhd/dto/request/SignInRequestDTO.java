@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SignInRequestDTO {
     @NotEmpty(message = "Username cannot be empty")
-    private String email;
+    private String username;
     @NotEmpty(message = "Password cannot be empty")
     private String password;
 }
