@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
             if (Objects.nonNull(updateUserDTO.getEmail()) && !updateUserDTO.getEmail().isEmpty()) {
                 user.setEmail(updateUserDTO.getEmail());
             }
-            if (Objects.nonNull(updateUserDTO.getName()) && !updateUserDTO.getName().isEmpty()) {
-                user.setName(updateUserDTO.getName());
+            if (Objects.nonNull(updateUserDTO.getFullName()) && !updateUserDTO.getFullName().isEmpty()) {
+                user.setFullName(updateUserDTO.getFullName());
             }
             if (Objects.nonNull(updateUserDTO.getTelephone()) && !updateUserDTO.getTelephone().isEmpty()) {
                 user.setTelephone(updateUserDTO.getTelephone());
