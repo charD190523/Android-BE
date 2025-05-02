@@ -1,12 +1,10 @@
 package com.example.bhd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,15 +17,39 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+
+    @Column(name = "username", unique = true)
     private String username;
+
+    @Column(name = "password")
     private String password;
-    private String name;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "telephone")
     private String telephone;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "gender")
     private String gender;
+
+    @Column(name = "birthday")
     private LocalDateTime birthday;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "province")
     private String province;
+
+    @Column(name = "role")
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    private List<Invoice> invoices;
 }

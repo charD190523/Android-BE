@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SignUpRequestDTO {
-    @NotEmpty(message = "Name cannot be empty")
-    private String name;
+    @NotEmpty(message = "FullName cannot be empty")
+    private String fullName;
     @NotEmpty(message = "Password cannot be empty")
     private String password;
     @NotEmpty(message = "Email cannot be empty")

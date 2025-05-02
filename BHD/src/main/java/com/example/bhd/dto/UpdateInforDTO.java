@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UpdateInforDTO {
     private String email;
-    private String name;
+    private String fullName;
     private String telephone;
     private LocalDateTime birthday;
     private String gender;
