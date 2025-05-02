@@ -35,25 +35,9 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/api/auth/**"
-                                                ,"/api/users/confirm-registration"
-                                                ,"/api/seat/generate"
-                                                ,"/api/movies/all"
-                                                ,"/api/ipn/**"
-                                                ,"/api/login/**"
-                                                , "/api/home").permitAll()
-                                .requestMatchers("/api/users/change-password"
-                                                ,"/api/user/update-infor"
-                                                ,"/api/seat-detail/**"
-                                                ,"/api/showtimes/getByMovie"
-                                                ,"/api/users/confirm-change-password"
-                                                ,"/api/food/all"
-                                                ,"/api/invoice/**"
-                                                ,"/api/payment/**"
-                                                , "/api/logout/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-                                .requestMatchers("/api/movies/admin/**"
-                                                ,"/api/showtimes/admin/**"
-                                                ,"/api/food/admin/**").hasRole(Role.ADMIN.name())
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/user/update-infor").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                                .requestMatchers("/api/admin/upload/**").hasRole(Role.ADMIN.name())
                                 .anyRequest().authenticated()
                 )
 //                .oauth2Login(oauth2 -> oauth2
