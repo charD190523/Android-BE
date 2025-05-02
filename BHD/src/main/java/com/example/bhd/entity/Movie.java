@@ -39,6 +39,9 @@ public class Movie {
     @Column(name = "required")
     private String required;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Showtime> showtimes;
 }
