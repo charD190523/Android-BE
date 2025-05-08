@@ -18,8 +18,11 @@ public class CustomUserDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
+        String role = user.getRole();
+        if (!role.startsWith("ROLE_")) {
+            role = "ROLE_" + role;
+        }
+        return Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
     @Override

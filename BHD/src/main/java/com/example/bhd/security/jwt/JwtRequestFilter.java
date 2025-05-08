@@ -32,20 +32,30 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
+            log.info("JWT token: {}", jwt);
+
             if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
+                log.info("Token is valid");
+
                 Integer userId = jwtProvider.getUserIdFromJWT(jwt);
+                log.info("User ID from token: {}", userId);
+
                 UserDetails userDetails = customUserService.loadUserById(userId);
+                log.info("UserDetails: {}", userDetails.getUsername());
+                log.info("Authorities: {}", userDetails.getAuthorities());
+
                 if (userDetails != null) {
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    log.info("Authentication set into context");
                 }
             }
         } catch (Exception ex) {
             log.error("Failed to authenticate user", ex);
         }
+
         filterChain.doFilter(request, response);
     }
 

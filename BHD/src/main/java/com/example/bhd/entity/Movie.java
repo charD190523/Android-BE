@@ -36,12 +36,16 @@ public class Movie {
     @Column(name = "actor")
     private String actor;
 
-    @Column(name = "required")
-    private String required;
+    @Column(name = "required_age")
+    private Integer requiredAge;
 
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "is_available")
+    private Boolean isAvailable;
+
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Showtime> showtimes;
+
 }
