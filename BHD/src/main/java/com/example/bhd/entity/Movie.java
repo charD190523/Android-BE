@@ -42,6 +42,9 @@ public class Movie {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "is_available")
     private Boolean isAvailable;
 

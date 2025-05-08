@@ -20,5 +20,6 @@ public interface UploadOperations {
                                                         String director,
                                                         String actor,
                                                         Integer requiredAge,
-                                                        Boolean isAvailable);
+                                                        Boolean isAvailable,
+                                                        String description); // format: "HH:mm:ss"
 }

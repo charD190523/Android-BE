@@ -31,7 +31,8 @@ public class UploadController implements UploadOperations {
                                                        @RequestParam("director") String director,
                                                        @RequestParam("actor") String actor,
                                                        @RequestParam("requiredAge") Integer requiredAge,
-                                                       @RequestParam("isAvailable") Boolean isAvailable) {
+                                                       @RequestParam("isAvailable") Boolean isAvailable,
+                                                       @RequestParam("description") String description) {
         try {
             Movie movie = Movie.builder()
                     .movieName(movieName)
@@ -41,6 +42,7 @@ public class UploadController implements UploadOperations {
                     .actor(actor)
                     .requiredAge(requiredAge)
                     .isAvailable(isAvailable)
+                    .description(description)
                     .build();
             return ResponseEntity.ok(ResponseFactory.success(uploadService.uploadMovie(file, movie)));
         } catch (Exception e) {
