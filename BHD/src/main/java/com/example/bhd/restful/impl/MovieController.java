@@ -1,0 +1,26 @@
+package com.example.bhd.restful.impl;
+
+import com.example.bhd.dto.ViewMovieDTO;
+import com.example.bhd.factory.GeneralResponse;
+import com.example.bhd.factory.ResponseFactory;
+import com.example.bhd.repository.MovieRepository;
+import com.example.bhd.restful.MovieOperations;
+import com.example.bhd.service.MovieService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@AllArgsConstructor
+public class MovieController implements MovieOperations {
+
+    private final MovieService movieService;
+
+    @Override
+    public ResponseEntity<GeneralResponse<List<ViewMovieDTO>>> Viewmovie() {
+        return ResponseEntity.ok(ResponseFactory.success(movieService.getAllMovies()));
+
+    }
+}

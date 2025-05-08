@@ -14,7 +14,7 @@ public class UpdateInforDTO {
     private String email;
     private String fullName;
     private String telephone;
-    private LocalDateTime birthday;
+    private String birthday;
     private String gender;
     private String province;
     private String address;

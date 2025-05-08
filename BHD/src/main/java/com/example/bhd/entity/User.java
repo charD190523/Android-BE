@@ -39,7 +39,7 @@ public class User {
     private String gender;
 
     @Column(name = "birthday")
-    private LocalDateTime birthday;
+    private String birthday;
 
     @Column(name = "address")
     private String address;
