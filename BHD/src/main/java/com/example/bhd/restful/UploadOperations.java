@@ -19,5 +19,6 @@ public interface UploadOperations {
                                                         String genre,
                                                         String director,
                                                         String actor,
-                                                        String requiredAge);
+                                                        Integer requiredAge,
+                                                        Boolean isAvailable);
 }
