@@ -1,5 +1,6 @@
 package com.example.bhd.restful.impl;
 
+import com.example.bhd.dto.MovieDetailDTO;
 import com.example.bhd.dto.ViewMovieDTO;
 import com.example.bhd.factory.GeneralResponse;
 import com.example.bhd.factory.ResponseFactory;
@@ -22,5 +23,10 @@ public class MovieController implements MovieOperations {
     public ResponseEntity<GeneralResponse<List<ViewMovieDTO>>> Viewmovie() {
         return ResponseEntity.ok(ResponseFactory.success(movieService.getAllMovies()));
 
+    }
+
+    @Override
+    public ResponseEntity<GeneralResponse<MovieDetailDTO>> getMovieDetail(Integer movieId) {
+        return ResponseEntity.ok(ResponseFactory.success(movieService.getMovieById(movieId)));
     }
 }

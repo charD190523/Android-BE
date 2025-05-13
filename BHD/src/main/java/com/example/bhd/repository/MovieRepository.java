@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Optional<Movie> findById(Integer id);
     List<Movie> findAll();
+
     // Custom query methods can be defined here if needed
 }

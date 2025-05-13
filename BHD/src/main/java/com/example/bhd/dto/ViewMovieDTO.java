@@ -11,6 +11,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ViewMovieDTO {
+    private Integer id;
     private String imageUrl;
     private String movieName;
     private LocalTime duration;

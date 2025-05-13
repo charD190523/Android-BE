@@ -1,5 +1,6 @@
 package com.example.bhd.service.impl;
 
+import com.example.bhd.dto.MovieDetailDTO;
 import com.example.bhd.dto.ViewMovieDTO;
 import com.example.bhd.entity.Movie;
 import com.example.bhd.repository.MovieRepository;
@@ -25,6 +26,12 @@ public class MovieServiceImpl implements MovieService {
         return movies.stream()
                 .map(movie -> objectMapper.convertValue(movie, ViewMovieDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public MovieDetailDTO getMovieById(Integer movieId) {
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        return objectMapper.convertValue(movie, MovieDetailDTO.class);
     }
 
 }
