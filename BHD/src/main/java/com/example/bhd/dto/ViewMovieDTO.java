@@ -15,4 +15,5 @@ public class ViewMovieDTO {
     private String movieName;
     private LocalTime duration;
     private Integer requiredAge;
+    private Boolean isAvailable;
 }
