@@ -1,5 +1,6 @@
 package com.example.bhd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,6 +51,7 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     private List<Invoice> invoices;
 }

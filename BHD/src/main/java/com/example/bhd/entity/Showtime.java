@@ -1,5 +1,6 @@
 package com.example.bhd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,7 @@ public class Showtime {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SeatDetail> seatDetails;
 

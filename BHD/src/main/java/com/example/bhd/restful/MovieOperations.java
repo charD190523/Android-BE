@@ -20,6 +20,10 @@ public interface MovieOperations {
     @GetMapping("get-detail")
     ResponseEntity<GeneralResponse<MovieDetailDTO>> getMovieDetail(@RequestParam("movieId") Integer movieId);
 
-    @GetMapping("find-by-date")
+    @GetMapping("find-all-by-date")
     ResponseEntity<GeneralResponse<List<MovieShowDTO>>> findbyMovieAndShowtime (@RequestParam("showDate") LocalDate showDate);
+
+    @GetMapping("find-by-date")
+    ResponseEntity<GeneralResponse<MovieShowDTO>> findByDate(@RequestParam("movieId") Integer movieId,
+                                                             @RequestParam("showDate") LocalDate showDate); // Chuyển đổi từ String sang LocalTime
 }

@@ -1,5 +1,6 @@
 package com.example.bhd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,7 @@ public class Seat {
     @Column(name = "price")
     private Float price;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SeatDetail> seatDetails;
 }

@@ -26,7 +26,7 @@ public class MovieServiceImpl implements MovieService {
 
     private final ShowtimeRepository showtimeRepository;
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public List<ViewMovieDTO> getAllMovies() {
@@ -78,6 +78,14 @@ public class MovieServiceImpl implements MovieService {
                     return new MovieShowDTO(m.getId(), m.getMovieName(), dtoList);
                 })
                 .toList();
+    }
+
+    @Override
+    public MovieShowDTO findByDate(Integer movieId, LocalDate showDate) {
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+        MovieShowDTO movieDTO = objectMapper.convertValue(movie, MovieShowDTO.class);
+        movieDTO.setShowtimes(showtimeRepository.findByMovieAndShowDate(movieId, showDate));
+        return movieDTO;
     }
 
 }

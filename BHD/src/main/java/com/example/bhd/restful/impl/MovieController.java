@@ -36,4 +36,9 @@ public class MovieController implements MovieOperations {
     public ResponseEntity<GeneralResponse<List<MovieShowDTO>>> findbyMovieAndShowtime(LocalDate showDate) {
         return ResponseEntity.ok(ResponseFactory.success(movieService.findByMovieAndShowtime(showDate)));
     }
+
+    @Override
+    public ResponseEntity<GeneralResponse<MovieShowDTO>> findByDate(Integer movieId, LocalDate showDate) {
+        return ResponseEntity.ok(ResponseFactory.success(movieService.findByDate(movieId, showDate)));
+    }
 }
