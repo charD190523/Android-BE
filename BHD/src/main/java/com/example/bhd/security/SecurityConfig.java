@@ -39,7 +39,8 @@ public class SecurityConfig {
                                                  "api/user/get-infor",
                                                  "/api/movie/get-detail",
                                                  "/api/movie/getAll").permitAll()
-                                .requestMatchers("/api/user/update-infor").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                                .requestMatchers("/api/user/update-infor",
+                                                 "/api/movie/find-by-date").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                                 .requestMatchers("/api/admin/upload/**").hasRole(Role.ADMIN.name())
                                 .anyRequest().authenticated()
                 )

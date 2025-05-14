@@ -30,6 +30,9 @@ public class Food {
     @Column(name = "price")
     private Float price;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany (mappedBy = "food", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<FoodDetail> foodDetails;

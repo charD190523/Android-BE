@@ -1,6 +1,7 @@
 package com.example.bhd.restful.impl;
 
 import com.example.bhd.dto.MovieDetailDTO;
+import com.example.bhd.dto.MovieShowDTO;
 import com.example.bhd.dto.ViewMovieDTO;
 import com.example.bhd.factory.GeneralResponse;
 import com.example.bhd.factory.ResponseFactory;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,5 +30,10 @@ public class MovieController implements MovieOperations {
     @Override
     public ResponseEntity<GeneralResponse<MovieDetailDTO>> getMovieDetail(Integer movieId) {
         return ResponseEntity.ok(ResponseFactory.success(movieService.getMovieById(movieId)));
+    }
+
+    @Override
+    public ResponseEntity<GeneralResponse<List<MovieShowDTO>>> findbyMovieAndShowtime(LocalDate showDate) {
+        return ResponseEntity.ok(ResponseFactory.success(movieService.findByMovieAndShowtime(showDate)));
     }
 }

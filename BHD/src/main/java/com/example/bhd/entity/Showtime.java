@@ -22,11 +22,11 @@ public class Showtime {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "show_date")
+    private LocalDate showDate;
 
-    @Column(name = "time")
-    private LocalTime time;
+    @Column(name = "start_time")
+    private LocalTime startTime;
 
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
