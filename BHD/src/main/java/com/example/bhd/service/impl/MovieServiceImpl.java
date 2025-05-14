@@ -45,8 +45,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieDetailDTO getMovieById(Integer movieId) {
-        Movie movie = movieRepository.findById(movieId).orElse(null);
-        return MovieDetailDTO.builder()
+        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
+        return  MovieDetailDTO.builder()
                 .actor(movie.getActor())
                 .genre(movie.getGenre())
                 .description(movie.getDescription())
@@ -67,6 +67,7 @@ public class MovieServiceImpl implements MovieService {
                 .map(m -> {
                     List<ShowtimeDTO> dtoList = grouped.get(m.getId()).stream()
                             .map(st -> new ShowtimeDTO(
+                                    st.getId(),
                                     st.getShowDate(),
                                     st.getStartTime(),
                                     st.getRoom().getId(),
