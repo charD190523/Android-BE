@@ -1,6 +1,8 @@
 package com.example.bhd.restful.impl;
 
 import com.example.bhd.dto.FoodDetailDTO;
+import com.example.bhd.dto.response.InvoiceCommonDTO;
+import com.example.bhd.dto.response.InvoiceDetailDTO;
 import com.example.bhd.dto.response.InvoiceResponse;
 import com.example.bhd.entity.Invoice;
 import com.example.bhd.factory.GeneralResponse;
@@ -53,5 +55,15 @@ public class InvoiceController implements InvoiceOperations {
             return ResponseEntity.badRequest().body(ResponseFactory.fail("Failed to cancel booking: " + e.getMessage()));
         }
         return ResponseEntity.ok(ResponseFactory.success("Booking cancelled successfully"));
+    }
+
+    @Override
+    public ResponseEntity<GeneralResponse<List<InvoiceCommonDTO>>> getAllInvoice(HttpSession session) {
+        return ResponseEntity.ok(ResponseFactory.success(invoiceService.getInvoiceList()));
+    }
+
+    @Override
+    public ResponseEntity<GeneralResponse<InvoiceDetailDTO>> getInvoiceDetail(Integer id) {
+        return ResponseEntity.ok(ResponseFactory.success(invoiceService.getInvoiceDetail(id)));
     }
 }

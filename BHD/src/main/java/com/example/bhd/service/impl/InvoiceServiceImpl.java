@@ -1,6 +1,8 @@
 package com.example.bhd.service.impl;
 
 import com.example.bhd.dto.FoodDetailDTO;
+import com.example.bhd.dto.response.InvoiceCommonDTO;
+import com.example.bhd.dto.response.InvoiceDetailDTO;
 import com.example.bhd.dto.response.InvoiceResponse;
 import com.example.bhd.entity.*;
 import com.example.bhd.repository.*;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +42,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private final EntityManager entityManager;
     private final SeatDetailRepository seatDetailRepository;
+    private final SeatRepository seatRepository;
 
     @Override
     @Transactional
@@ -107,5 +111,22 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .toList();
         seatDetailRepository.saveAll(seatDetailsToUpdate);
         sessionService.removeAllAttributes(session);
+    }
+
+    @Override
+    public List<InvoiceCommonDTO> getInvoiceList() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Integer userId = userDetails.getUser().getId();
+        return invoiceRepository.findAllInvoiceCommon(userId);
+    }
+
+    @Override
+    public InvoiceDetailDTO getInvoiceDetail(Integer id) {
+        InvoiceDetailDTO invoiceDetailDTO = invoiceRepository.findInvoiceDetailById(id);
+        Optional<List<Seat>> seatList = seatRepository.findByInvoiceId(id);
+        invoiceDetailDTO.setSeats(seatList.orElseGet(ArrayList::new));
+        invoiceDetailDTO.setFoodPrice((float) (invoiceDetailDTO.getTotalPrice() - invoiceDetailDTO.getTicketPrice()));
+        return invoiceDetailDTO;
     }
 }

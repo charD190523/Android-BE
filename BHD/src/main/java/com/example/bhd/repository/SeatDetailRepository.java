@@ -33,4 +33,6 @@ public interface SeatDetailRepository extends JpaRepository<SeatDetail, Integer>
     @Transactional
     @Query ("DELETE FROM SeatDetail s WHERE s.id = :seatDetailId AND s.userId = :userId")
     void removeSeatDetail(@Param("seatDetailId") Integer seatDetailId, @Param("userId") Integer userId);
+
+
 }

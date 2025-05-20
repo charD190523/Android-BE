@@ -1,6 +1,8 @@
 package com.example.bhd.restful;
 
 import com.example.bhd.dto.FoodDetailDTO;
+import com.example.bhd.dto.response.InvoiceCommonDTO;
+import com.example.bhd.dto.response.InvoiceDetailDTO;
 import com.example.bhd.dto.response.InvoiceResponse;
 import com.example.bhd.entity.Invoice;
 import com.example.bhd.factory.GeneralResponse;
@@ -21,5 +23,11 @@ public interface InvoiceOperations {
 
     @GetMapping("/cancel")
     ResponseEntity<GeneralResponse<String>> cancelBooking(HttpSession session);
+
+    @GetMapping("/getAll")
+    ResponseEntity<GeneralResponse<List<InvoiceCommonDTO>>> getAllInvoice(HttpSession session);
+
+    @GetMapping("/getDetail")
+    ResponseEntity<GeneralResponse<InvoiceDetailDTO>> getInvoiceDetail(Integer id);
 }
 
