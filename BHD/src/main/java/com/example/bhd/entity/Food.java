@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.List;
 @Table(name = "food")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Food {
+public class Food implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,7 +34,7 @@ public class Food {
     @Column(name = "description")
     private String description;
 
-    @OneToMany (mappedBy = "food", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "food", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<FoodDetail> foodDetails;
 }

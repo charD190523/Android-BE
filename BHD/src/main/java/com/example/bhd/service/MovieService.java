@@ -12,6 +12,6 @@ import java.util.List;
 public interface MovieService {
     List<ViewMovieDTO> getAllMovies();
     MovieDetailDTO getMovieById(Integer movieId);
-    List<MovieShowDTO>  findByMovieAndShowtime(LocalDate movieName);
+    List<MovieShowDTO>  findByMovieAndShowtime(LocalDate showDate);
     MovieShowDTO findByDate(Integer movieId, LocalDate showDate); // Chuyển đổi từ String sang LocalTime
 }

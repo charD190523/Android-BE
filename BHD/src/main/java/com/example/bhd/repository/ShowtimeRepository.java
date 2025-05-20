@@ -8,8 +8,12 @@ import org.springframework.data.repository.query.Param;
     
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface ShowtimeRepository extends JpaRepository<Showtime, Integer> {
+
+    Optional<Showtime> findById(Integer id);
+
     List<Showtime> findByShowDate(LocalDate showDate);
 
     @Query("""

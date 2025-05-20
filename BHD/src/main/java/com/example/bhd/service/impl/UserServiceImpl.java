@@ -62,6 +62,14 @@ public class UserServiceImpl implements UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new CustomException(400, "User's credential not found!"));
-        return objectMapper.convertValue(user, UpdateInforDTO.class);
+        return UpdateInforDTO.builder()
+                .email(user.getEmail())
+                .fullName(user.getFullName())
+                .telephone(user.getTelephone())
+                .birthday(user.getBirthday())
+                .gender(user.getGender())
+                .province(user.getProvince())
+                .address(user.getAddress())
+                .build();
     }
 }

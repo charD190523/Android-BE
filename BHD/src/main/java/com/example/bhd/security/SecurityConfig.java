@@ -9,10 +9,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @Configuration
 @AllArgsConstructor
@@ -33,7 +37,16 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOriginPatterns(List.of("*"));
+                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    config.setAllowedHeaders(List.of("*"));
+                    return config;
+                }))
                 .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sess -> sess
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers("/api/auth/**",
                                                  "api/user/get-infor",
@@ -41,7 +54,10 @@ public class SecurityConfig {
                                                  "/api/movie/find-all-by-date",
                                                  "/api/movie/getAll").permitAll()
                                 .requestMatchers("/api/user/update-infor",
-                                                 "/api/movie/find-by-date"
+                                                 "/api/invoice/**",
+                                                 "/api/movie/find-by-date",
+                                                 "/api/seat-detail/**",
+                                                 "/api/food/**"
                                                  ).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                                 .requestMatchers("/api/admin/upload/**").hasRole(Role.ADMIN.name())
                                 .anyRequest().authenticated()

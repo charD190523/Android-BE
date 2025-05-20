@@ -1,19 +1,16 @@
 package com.example.bhd.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieShowDTO {
+public class SeatDetailDTO {
     private Integer id;
-    private String imageUrl;
-    private String movieName;
-    private List<ShowtimeDTO> showtimes;
+    private String status;
+    private Integer seatId;
+    private String seatName;
+    private Integer userId;
 }

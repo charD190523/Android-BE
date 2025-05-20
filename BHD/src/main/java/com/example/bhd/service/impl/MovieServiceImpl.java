@@ -75,7 +75,7 @@ public class MovieServiceImpl implements MovieService {
                             ))
                             .toList();
 
-                    return new MovieShowDTO(m.getId(), m.getMovieName(), dtoList);
+                    return new MovieShowDTO(m.getId(), m.getImageUrl(), m.getMovieName(), dtoList);
                 })
                 .toList();
     }
@@ -83,7 +83,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public MovieShowDTO findByDate(Integer movieId, LocalDate showDate) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
-        MovieShowDTO movieDTO = objectMapper.convertValue(movie, MovieShowDTO.class);
+        MovieShowDTO movieDTO = MovieShowDTO.builder()
+                .id(movie.getId())
+                .movieName(movie.getMovieName())
+                .build();
         movieDTO.setShowtimes(showtimeRepository.findByMovieAndShowDate(movieId, showDate));
         return movieDTO;
     }

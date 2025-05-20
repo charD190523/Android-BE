@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import java.io.Serial;
 @Table(name = "food_detail")
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodDetail  {
+public class FoodDetail implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -26,12 +27,11 @@ public class FoodDetail  {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_id")
-    @JsonIgnore
     private Food food;
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id")
     @JsonIgnore
     private Invoice invoice;

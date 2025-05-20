@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -15,7 +17,9 @@ import java.util.List;
 @Table(name = "seat")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Seat {
+public class Seat implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name = "id")
@@ -24,9 +28,6 @@ public class Seat {
     @Column(name = "seat_name")
     private String seatName;
 
-    @Column(name = "status")
-    private Integer status;
-
     @Column(name = "type")
     private String type;
 
@@ -34,6 +35,6 @@ public class Seat {
     private Float price;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "seat", fetch = FetchType.LAZY)
     private List<SeatDetail> seatDetails;
 }
